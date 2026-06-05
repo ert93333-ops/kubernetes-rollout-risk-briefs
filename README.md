@@ -6,6 +6,7 @@ Static browser-local MVP for turning public-safe Kubernetes rollout notes or scr
 
 - Landing: `https://ert93333-ops.github.io/kubernetes-rollout-risk-briefs/`
 - Checklist: `https://ert93333-ops.github.io/kubernetes-rollout-risk-briefs/kubernetes-rollout-checklist.html`
+- Public marketing checklist: `https://gist.github.com/ert93333-ops/14e41a8c59dc769ac03cb7f2532b5ae7`
 
 ## Scope
 
