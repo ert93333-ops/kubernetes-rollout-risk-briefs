@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kubernetes Rollout Risk Briefs | Kubernetes rollout checklist</title>
+  <meta name="description" content="Paste public-safe Kubernetes rollout notes and generate a reviewer-ready rollout risk brief, readiness/probe warnings, rollback checklist, validation path, and secret hygiene flags.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="Kubernetes Rollout Risk Briefs">
+  <meta property="og:description" content="Turn Kubernetes rollout notes into a reviewer-ready risk brief before deploy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ert93333-ops.github.io/kubernetes-rollout-risk-briefs/">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://ert93333-ops.github.io/kubernetes-rollout-risk-briefs/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#workflow">Skip to workflow</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./" aria-label="Kubernetes Rollout Risk Briefs home">Kubernetes Rollout Risk Briefs</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#workflow">Workflow</a>
+        <a href="#pricing">Pricing</a>
+        <a href="kubernetes-rollout-checklist.html">Checklist</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <h1>Turn Kubernetes rollout notes into a reviewer-ready risk brief before deploy.</h1>
+          <p class="hero-subtitle">Paste public-safe rollout notes or scrubbed manifest excerpts and get a change summary, readiness/probe warnings, config/secret risk, rollback checklist, validation path, owner handoff, and secret hygiene flags before a human approves rollout.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#workflow">Generate rollout risk brief</a>
+            <a class="button secondary" href="kubernetes-rollout-checklist.html">View rollout checklist</a>
+          </div>
+        </div>
+        <aside class="brief-preview" aria-label="Brief preview">
+          <p class="brief-label">Checks before deploy</p>
+          <strong>Namespace, workload, image tag, replicas, rollout strategy, probes, PDB, config/secret changes, rollback, validation, owner, and cluster-data risk.</strong>
+          <p>No kubectl. No kubeconfig. No cluster access. No secret manifest upload.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="workflow" class="section">
+      <div class="shell section-grid">
+        <div>
+          <h2>Turn vague rollout notes into precise deployment review briefs.</h2>
+          <p>Use public-safe notes only. Do not paste kubeconfig, cluster credentials, service account tokens, secret manifests, raw logs, customer namespaces, private cluster endpoints, internal URLs, personal data, or confidential customer details.</p>
+          <div class="input-grid">
+            <label>Rollout notes or scrubbed manifest excerpt<textarea id="rollout-notes" placeholder="Example: roll out payment-api image v2.7.4 to production at 10:00 UTC."></textarea></label>
+            <label>Namespace, workload, service, image, tag, or replica scope<textarea id="scope-notes" class="short-textarea" placeholder="Example: namespace payments, Deployment payment-api, Service payment-api, image v2.7.4, 6 replicas."></textarea></label>
+            <label>Rollout strategy, availability, max surge/unavailable, PDB, or disruption context<textarea id="strategy-notes" class="short-textarea" placeholder="Example: RollingUpdate, maxSurge 1, maxUnavailable 0, PDB minAvailable 5."></textarea></label>
+            <label>Readiness, liveness, startup probe, or health-check context<textarea id="probe-notes" class="short-textarea" placeholder="Example: readiness /ready, liveness /healthz, startup probe unchanged."></textarea></label>
+            <label>Config, secret, env, volume, service, ingress, resource, HPA, or scheduling changes<textarea id="change-notes" class="short-textarea" placeholder="Example: ConfigMap and env var changed; CPU/memory unchanged; no ingress or HPA change."></textarea></label>
+            <label>Rollback command, revision, previous image/tag, or undo plan<textarea id="rollback-notes" class="short-textarea" placeholder="Example: kubectl rollout undo deployment/payment-api --to-revision=41 after approval."></textarea></label>
+            <label>Validation, smoke test, health check, monitor, or rollout status path<textarea id="validation-notes" class="short-textarea" placeholder="Example: rollout status, synthetic checkout smoke test, metrics and restart monitor."></textarea></label>
+            <label>Owner, reviewer, approver, maintenance window, escalation, or next update<textarea id="owner-notes" class="short-textarea" placeholder="Example: platform release lead owns rollout; SRE reviewer; next update by 10:15 UTC."></textarea></label>
+            <label>Tone / privacy notes<textarea id="privacy-notes" class="short-textarea" placeholder="Example: no zero-downtime guarantee, no kubeconfig, no raw logs, no secret manifests."></textarea></label>
+          </div>
+          <div class="form-actions">
+            <button class="button secondary" type="button" id="sample-button">Load sample rollout</button>
+            <button class="button primary" type="button" id="generate-button">Generate rollout risk brief</button>
+          </div>
+          <p class="copy-status" id="workflow-error" role="status" aria-live="polite"></p>
+        </div>
+        <aside class="output-panel" id="output-panel" aria-live="polite">
+          <div class="status-pill"><span class="status-dot"></span><span id="output-status">Waiting for rollout notes</span></div>
+          <div id="brief-output" class="brief-output"><p>Paste public-safe Kubernetes rollout context to generate a reviewer-ready risk brief.</p></div>
+          <button class="button small" type="button" id="copy-brief" disabled>Copy brief</button>
+          <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="shell">
+        <h2>Pay only if this reduces risky deployment reviews and rollback ambiguity.</h2>
+        <div class="pricing-grid">
+          <article class="price-card">
+            <h3>Starter</h3>
+            <p class="price">$19/month</p>
+            <p>For founders and small engineering teams reviewing ad hoc Kubernetes rollouts.</p>
+            <button class="button full plan-button" type="button" data-plan="Starter">Request Starter access</button>
+          </article>
+          <article class="price-card">
+            <h3>Team</h3>
+            <p class="price">$79/month</p>
+            <p>For platform, SRE, DevOps, and release engineering teams standardizing rollout review before deploy.</p>
+            <button class="button full plan-button" type="button" data-plan="Team">Request Team access</button>
+          </article>
+        </div>
+        <form class="handoff-panel" id="intent-form">
+          <h3>Purchase-intent fallback</h3>
+          <p>Stored locally in this browser. The public issue handoff excludes private email by default.</p>
+          <div class="input-grid compact">
+            <label>Email<input id="intent-email" type="email" placeholder="you@example.com"></label>
+            <label>Role/team<input id="intent-role" type="text" placeholder="Founder, SRE, DevOps, platform, release engineering..."></label>
+            <label>Rollout review volume<input id="rollout-volume" type="text" placeholder="Example: 12 Kubernetes rollouts per month"></label>
+            <label>Current rollout review process<input id="current-process" type="text" placeholder="Example: Argo CD diff plus PR checklist"></label>
+            <label>Plan interest<select id="plan-interest"><option>Starter</option><option>Team</option></select></label>
+            <label>Willingness to pay<input id="willingness" type="text" placeholder="$19/month, $79/month, paid pilot..."></label>
+          </div>
+          <button class="button primary" type="submit">Request early access</button>
+          <p class="copy-status" id="intent-status" role="status" aria-live="polite"></p>
+          <div id="remote-intent" hidden>
+            <a class="button secondary" id="remote-intent-link" target="_blank" rel="noreferrer">Open public request</a>
+            <button class="button ghost" type="button" id="copy-remote-intent">Copy request details</button>
+            <p class="copy-status" id="remote-copy-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <p>Browser-local MVP. No kubectl execution, kubeconfig, cluster credentials, Kubernetes API access, raw logs, secret manifests, automated rollout, rollback, remediation, backend, or external database.</p>
+      <a href="kubernetes-rollout-checklist.html">Kubernetes rollout checklist</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

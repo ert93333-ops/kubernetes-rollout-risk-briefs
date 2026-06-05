@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kubernetes rollout checklist | Kubernetes Rollout Risk Briefs</title>
+  <meta name="description" content="A practical Kubernetes rollout checklist for namespace, workload, image tag, strategy, readiness probes, rollback, validation, PDB, and secret hygiene before deploy.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="Kubernetes rollout checklist">
+  <meta property="og:description" content="Checklist for reviewing Kubernetes rollout risk before deploy.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ert93333-ops.github.io/kubernetes-rollout-risk-briefs/kubernetes-rollout-checklist.html">
+  <link rel="canonical" href="https://ert93333-ops.github.io/kubernetes-rollout-risk-briefs/kubernetes-rollout-checklist.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./">Kubernetes Rollout Risk Briefs</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="./#workflow">Workflow</a>
+        <a href="./#pricing">Pricing</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <article class="section">
+      <div class="shell article-body">
+        <p class="brief-label">Checklist</p>
+        <h1>Kubernetes rollout checklist</h1>
+        <p>Use this before approving a Kubernetes rollout or rollback. Keep kubeconfig, cluster tokens, raw logs, secret manifests, private cluster endpoints, customer namespaces, internal URLs, and personal data out of public tools.</p>
+
+        <h2>1. State the rollout scope</h2>
+        <ul>
+          <li>Namespace, workload kind/name, service, image, tag, and replica count</li>
+          <li>Customer or service impact scope</li>
+          <li>Rollout window and owner</li>
+        </ul>
+
+        <h2>2. Check strategy and availability</h2>
+        <ul>
+          <li>RollingUpdate, max surge, max unavailable, and expected available pods</li>
+          <li>PDB, disruption, maintenance window, or dependency constraints</li>
+          <li>Readiness, liveness, startup probes, and health-check behavior</li>
+        </ul>
+
+        <h2>3. Review change surfaces</h2>
+        <ul>
+          <li>ConfigMap, Secret, env var, volume, service, ingress, resources, HPA, affinity, tolerations, or selector changes</li>
+          <li>Validation path: rollout status, smoke tests, metrics, alerts, restart count, and logs owned by the team</li>
+          <li>Rollback path: revision, previous image/tag, approval owner, and rollback validation</li>
+        </ul>
+
+        <h2>4. Avoid unsafe claims and private data</h2>
+        <ul>
+          <li>Do not guarantee zero downtime or instant rollback unless that is explicitly validated.</li>
+          <li>Do not paste kubeconfig, service account tokens, Secret manifests, certificates, raw logs, cluster endpoints, or customer namespaces.</li>
+          <li>Use public-safe notes and scrubbed manifest excerpts only.</li>
+        </ul>
+
+        <p><a class="button primary" href="./?utm_source=seo&utm_medium=organic&utm_campaign=kubernetes_rollout_risk_template#workflow">Generate a rollout risk brief</a></p>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <p>Browser-local Kubernetes rollout QA. No kubectl, kubeconfig, cluster access, secret manifest upload, or automated remediation.</p>
+      <a href="./">Kubernetes Rollout Risk Briefs</a>
+    </div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
