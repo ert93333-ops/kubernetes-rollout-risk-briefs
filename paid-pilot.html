@@ -14,6 +14,10 @@
   <link rel="canonical" href="https://ert93333-ops.github.io/kubernetes-rollout-risk-briefs/paid-pilot.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    window.STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_4gM28r4A2cP2bggdg56oo02";
+    window.STRIPE_PAYMENT_MODE = "test";
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#pilot-form">Skip to paid pilot form</a>
@@ -68,6 +72,14 @@
 
     <section id="pilot-form" class="section">
       <div class="shell">
+        <div class="handoff-panel" id="stripe-checkout-panel">
+          <h2>Pay with Stripe</h2>
+          <p><strong>Current Stripe mode:</strong> <span id="stripe-mode-label">checking</span></p>
+          <p>This checkout link was created from the connected Stripe account. If it shows test mode, use it only to verify flow; real revenue requires a live Stripe Payment Link.</p>
+          <a class="button primary" id="stripe-payment-link" href="#" target="_blank" rel="noreferrer">Open Stripe checkout</a>
+          <p class="copy-status" id="stripe-status" role="status" aria-live="polite"></p>
+        </div>
+
         <form class="handoff-panel" id="paid-pilot-form">
           <h2>Request invoice-ready paid pilot</h2>
           <p>Stripe is not connected on this static site, so this captures paid purchase intent and prepares a public-safe GitHub handoff for invoice or manual checkout follow-up.</p>
@@ -110,6 +122,15 @@
     }
     track("page_view");
     track("paid_pilot_page_viewed");
+    const stripeLink = document.querySelector("#stripe-payment-link");
+    const stripeModeLabel = document.querySelector("#stripe-mode-label");
+    const stripeStatus = document.querySelector("#stripe-status");
+    if (stripeLink && window.STRIPE_PAYMENT_LINK) {
+      stripeLink.href = window.STRIPE_PAYMENT_LINK;
+      stripeModeLabel.textContent = window.STRIPE_PAYMENT_MODE === "live" ? "live" : "test";
+      stripeStatus.textContent = window.STRIPE_PAYMENT_MODE === "live" ? "Live checkout ready." : "Test checkout only. Invoice/manual checkout remains the real-payment fallback until a live Stripe link is configured.";
+      stripeLink.addEventListener("click", () => track("stripe_checkout_clicked", { mode: window.STRIPE_PAYMENT_MODE, urlHost: new URL(window.STRIPE_PAYMENT_LINK).host }));
+    }
     let lastBody = "";
     const form = document.querySelector("#paid-pilot-form");
     form.addEventListener("submit", (event) => {
