@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kubernetes Rollout Risk Briefs | Paid pilot</title>
+  <meta name="description" content="Buy a paid Kubernetes rollout review pilot. A browser-local reviewer brief workflow for teams that need safer deployment approvals without kubeconfig, manifests with secrets, cluster access, or production logs.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="Kubernetes Rollout Risk Briefs paid pilot">
+  <meta property="og:description" content="A browser-local reviewer brief workflow for teams that need safer deployment approvals without kubeconfig, manifests with secrets, cluster access, or production logs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ert93333-ops.github.io/kubernetes-rollout-risk-briefs/paid-pilot.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://ert93333-ops.github.io/kubernetes-rollout-risk-briefs/paid-pilot.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#pilot-form">Skip to paid pilot form</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./" aria-label="Kubernetes Rollout Risk Briefs home">Kubernetes Rollout Risk Briefs</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="./#workflow">Workflow</a>
+        <a href="./#pricing">Pricing</a>
+        <a href="paid-pilot.html">Paid pilot</a>
+        <a href="kubernetes-rollout-checklist.html">Checklist</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <h1>Buy a paid Kubernetes rollout review pilot.</h1>
+          <p class="hero-subtitle">A browser-local reviewer brief workflow for teams that need safer deployment approvals without kubeconfig, manifests with secrets, cluster access, or production logs.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#pilot-form">Request paid rollout pilot</a>
+            <a class="button secondary" href="./">Try the browser workflow</a>
+          </div>
+        </div>
+        <aside class="brief-preview" aria-label="Paid pilot preview">
+          <p class="brief-label">Observed traction</p>
+          <strong>48 YouTube views</strong>
+          <p>$299 paid pilot. We turn up to 10 public-safe rollout notes into risk briefs, then deliver a reusable rollout-review checklist and the browser-local workflow link.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <h2>Paid pilot scope</h2>
+        <div class="pricing-grid">
+          <article class="price-card">
+            <h3>Pilot</h3>
+            <p class="price">$299</p>
+            <p>We turn up to 10 public-safe rollout notes into risk briefs, then deliver a reusable rollout-review checklist and the browser-local workflow link.</p>
+          </article>
+          <article class="price-card">
+            <h3>Buyer fit</h3>
+            <p>Platform, SRE, DevOps, GitOps, release engineering, and technical founder teams.</p>
+            <p>No credentials, private exports, production data, or account access required.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pilot-form" class="section">
+      <div class="shell">
+        <form class="handoff-panel" id="paid-pilot-form">
+          <h2>Request invoice-ready paid pilot</h2>
+          <p>Stripe is not connected on this static site, so this captures paid purchase intent and prepares a public-safe GitHub handoff for invoice or manual checkout follow-up.</p>
+          <div class="input-grid compact">
+            <label>Email<input id="pilot-email" type="email" placeholder="you@example.com"></label>
+            <label>Role/team<input id="pilot-role" type="text" placeholder="Platform, SRE, DevOps, GitOps, release engineering, and technical founder teams."></label>
+            <label>Rollout review volume<input id="pilot-volume" type="text" placeholder="Example: 15 rollout approvals per month"></label>
+            <label>Current process<input id="pilot-process" type="text" placeholder="Example: GitOps PR plus on-call approval"></label>
+            <label>Pilot budget<select id="pilot-budget"><option>$299 paid pilot</option><option>$499 expanded pilot</option><option>Need invoice first</option></select></label>
+            <label>Success criterion<input id="pilot-success" type="text" placeholder="Example: two risky reviews caught before deploy"></label>
+          </div>
+          <button class="button primary" type="submit">Request paid rollout pilot</button>
+          <p class="copy-status" id="pilot-status" role="status" aria-live="polite"></p>
+          <div id="pilot-remote" hidden>
+            <a class="button secondary" id="pilot-issue-link" target="_blank" rel="noreferrer">Open public pilot request</a>
+            <button class="button ghost" type="button" id="copy-pilot-request">Copy pilot request details</button>
+            <p class="copy-status" id="pilot-copy-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <p>Paid pilot capture only. Do not include credentials, tokens, production data, private exports, customer data, or confidential URLs in public requests.</p>
+      <a href="kubernetes-rollout-checklist.html">Checklist</a>
+    </div>
+  </footer>
+
+  <script>
+    const PRODUCT = "Kubernetes Rollout Risk Briefs";
+    const STORAGE_PREFIX = "kubernetesrolloutriskbriefs";
+    const ISSUE_URL = "https://github.com/ert93333-ops/kubernetes-rollout-risk-briefs/issues/new?template=demo_request.md&labels=early-access%2Cpurchase-intent%2Cdemo-request&title=Paid%20pilot%20request%3A%20Kubernetes%20Rollout%20Risk%20Briefs";
+    function track(event, detail = {}) {
+      const key = STORAGE_PREFIX + "_analytics_events";
+      const events = JSON.parse(localStorage.getItem(key) || "[]");
+      events.push({ event, detail, product: PRODUCT, page: location.pathname, utm: Object.fromEntries(new URLSearchParams(location.search)), at: new Date().toISOString() });
+      localStorage.setItem(key, JSON.stringify(events.slice(-200)));
+    }
+    track("page_view");
+    track("paid_pilot_page_viewed");
+    let lastBody = "";
+    const form = document.querySelector("#paid-pilot-form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const intent = {
+        email: document.querySelector("#pilot-email").value.trim(),
+        role: document.querySelector("#pilot-role").value.trim(),
+        volume: document.querySelector("#pilot-volume").value.trim(),
+        process: document.querySelector("#pilot-process").value.trim(),
+        budget: document.querySelector("#pilot-budget").value,
+        success: document.querySelector("#pilot-success").value.trim(),
+        at: new Date().toISOString(),
+      };
+      const key = STORAGE_PREFIX + "_paid_pilot_intents";
+      const intents = JSON.parse(localStorage.getItem(key) || "[]");
+      intents.push(intent);
+      localStorage.setItem(key, JSON.stringify(intents.slice(-50)));
+      lastBody = [
+        "Public paid pilot request for " + PRODUCT + ".",
+        "",
+        "Role/team: " + (intent.role || "[not provided]"),
+        "Rollout review volume: " + (intent.volume || "[not provided]"),
+        "Current process: " + (intent.process || "[not provided]"),
+        "Pilot budget: " + intent.budget,
+        "Success criterion: " + (intent.success || "[not provided]"),
+        "",
+        "Do not include credentials, tokens, production data, private exports, customer data, confidential URLs, or email addresses in this public issue."
+      ].join("\n");
+      document.querySelector("#pilot-issue-link").href = ISSUE_URL + "&body=" + encodeURIComponent(lastBody);
+      document.querySelector("#pilot-remote").hidden = false;
+      document.querySelector("#pilot-status").textContent = "Paid pilot intent saved locally. Open or copy the public-safe request for invoice/manual checkout follow-up.";
+      track("checkout_intent", { budget: intent.budget, hasEmail: Boolean(intent.email), product: PRODUCT });
+      track("paid_pilot_requested", { budget: intent.budget });
+    });
+    document.querySelector("#copy-pilot-request").addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(lastBody); } catch {}
+      document.querySelector("#pilot-copy-status").textContent = "Copied pilot request details.";
+      track("paid_pilot_request_copied");
+    });
+  </script>
+</body>
+</html>
